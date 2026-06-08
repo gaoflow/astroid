@@ -38,9 +38,9 @@ urls."Source Code" = "https://github.com/pylint-dev/astroid"
 urls.Docs = "https://pylint.readthedocs.io/projects/astroid/en/latest/"
 
 [tool.setuptools]
-dynamic.version = { attr = "astroid.__pkginfo__.__version__" }
-package-dir."" = "."
 packages.find.include = [ "astroid*" ]
+package-dir."" = "."
+dynamic.version = { attr = "astroid.__pkginfo__.__version__" }
 
 [tool.ruff]
 target-version = "py310"
@@ -79,7 +79,6 @@ lint.unfixable = [ "RUF001" ]
 max_supported_python = "3.14"
 
 [tool.mypy]
-python_version = "3.10"
 files = [
   "astroid/_ast.py",
   "astroid/astroid_manager.py",
@@ -118,6 +117,8 @@ files = [
   "astroid/nodes/const.py",
   "astroid/nodes/utils.py",
 ]
+follow_imports = "silent"
+python_version = "3.10"
 always_false = [
   "PY311_PLUS",
   "PY312_PLUS",
@@ -125,13 +126,12 @@ always_false = [
 ]
 disallow_any_decorated = true
 disallow_any_explicit = true
-follow_imports = "silent"
-scripts_are_modules = true
-show_error_codes = true
-strict = true
 warn_redundant_casts = true
 warn_unreachable = true
+strict = true
+scripts_are_modules = true
 warn_unused_configs = false
+show_error_codes = true
 
 [[tool.mypy.overrides]]
 # Importlib typeshed stubs do not include the private functions we use
@@ -146,9 +146,9 @@ module = [
 ignore_missing_imports = true
 
 [tool.pytest]
-ini_options.addopts = '-m "not acceptance"'
-ini_options.python_files = [ "*test_*.py" ]
 ini_options.testpaths = [ "tests" ]
+ini_options.python_files = [ "*test_*.py" ]
+ini_options.addopts = '-m "not acceptance"'
 ini_options.filterwarnings = "error"
 
 [tool.aliases]
